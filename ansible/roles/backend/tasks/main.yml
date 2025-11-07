@@ -1,8 +1,9 @@
 - name: Install dependencies
-  apt:
-    name: ["git", "python3-pip"]
+  package:
+    name:
+      - git
+      - python3-pip
     state: present
-    update_cache: yes
 
 - name: Clone EpicBook repo
   git:

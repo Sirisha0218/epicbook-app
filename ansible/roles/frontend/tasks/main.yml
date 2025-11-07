@@ -3,6 +3,7 @@
     name: nginx
     state: present
     update_cache: yes
+  become: yes
 
 - name: Clone EpicBook repo
   git:
