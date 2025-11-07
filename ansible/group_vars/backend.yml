@@ -1,0 +1,4 @@
+mysql_db_name: epicbook_db
+mysql_endpoint: epicbook-mysql.ca5ssik42y9m.us-east-1.rds.amazonaws.com
+app_repo: "https://github.com/pravinmishraaws/theepicbook.git"
+app_dir: "/home/ubuntu/epicbook"

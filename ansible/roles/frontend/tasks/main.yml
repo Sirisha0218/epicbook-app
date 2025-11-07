@@ -1,0 +1,27 @@
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: Clone EpicBook repo
+  git:
+    repo: "{{ app_repo }}"
+    dest: "{{ app_dir }}"
+    version: "main"
+
+- name: Deploy Nginx config
+  template:
+    src: "{{ nginx_conf_template }}"
+    dest: /etc/nginx/sites-available/epicbook.conf
+
+- name: Enable site
+  file:
+    src: /etc/nginx/sites-available/epicbook.conf
+    dest: /etc/nginx/sites-enabled/epicbook.conf
+    state: link
+
+- name: Restart Nginx
+  service:
+    name: nginx
+    state: restarted

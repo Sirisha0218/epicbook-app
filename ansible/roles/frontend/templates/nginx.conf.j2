@@ -1,0 +1,9 @@
+server {
+    listen 80;
+    server_name {{ ansible_host }};
+
+    location / {
+        root {{ app_dir }};
+        index index.html;
+    }
+}

@@ -1,0 +1,21 @@
+- name: Install dependencies
+  apt:
+    name: ["git", "python3-pip"]
+    state: present
+    update_cache: yes
+
+- name: Clone EpicBook repo
+  git:
+    repo: "{{ app_repo }}"
+    dest: "{{ app_dir }}"
+    version: "main"
+
+- name: Configure application environment
+  template:
+    src: env.j2
+    dest: "{{ app_dir }}/.env"
+
+- name: Install Python requirements
+  pip:
+    requirements: "{{ app_dir }}/requirements.txt"
+    executable: pip3

@@ -1,0 +1,3 @@
+app_repo: "https://github.com/pravinmishraaws/theepicbook.git"
+app_dir: "/home/ubuntu/epicbook"
+nginx_conf_template: "nginx.conf.j2"
