@@ -1,0 +1,39 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  name: 'linux-hosted-agent-pool'
+
+variables:
+  - group: Terraform-AWS-Creds   # contains mysqlAdminUser + mysqlAdminPassword
+
+stages:
+  - stage: Ansible_Config
+    displayName: "Configure and Deploy EpicBook"
+    jobs:
+      - job: Ansible
+        displayName: "Run Ansible Playbooks"
+        steps:
+
+          # Download SSH key from Secure Files
+          - task: DownloadSecureFile@1
+            name: sshKey
+            inputs:
+              secureFile: ubuntu-key
+
+          # Install Ansible
+          - script: |
+              sudo apt-get update
+              sudo apt-get install -y ansible
+            displayName: "Install Ansible"
+
+          # Run Ansible playbook
+          - script: |
+              ansible-playbook playbooks/site.yml \
+                -i inventories/aws_ec2.yml \
+                --private-key $(sshKey.secureFilePath) \
+                -e "db_username=$(mysqlAdminUser) db_password=$(mysqlAdminPassword)"
+            workingDirectory: $(System.DefaultWorkingDirectory)/ansible
+            displayName: "Run Ansible Deployment"
