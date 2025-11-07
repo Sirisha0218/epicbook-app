@@ -31,7 +31,7 @@ stages:
 
           # Run Ansible playbook
           - script: |
-              ansible-playbook playbooks/site.yml \
+              ansible-playbook site.yml \
                 -i inventories/aws_ec2.yml \
                 --private-key $(sshKey.secureFilePath) \
                 -e "db_username=$(mysqlAdminUser) db_password=$(mysqlAdminPassword)"
