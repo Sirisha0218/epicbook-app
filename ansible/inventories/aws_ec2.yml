@@ -1,8 +1,12 @@
 all:
-  hosts:
+  children:
     backend:
-      ansible_host: 3.83.176.19
-      ansible_user: ec2-user
+      hosts:
+        backend1:
+          ansible_host: 3.83.176.19
+          ansible_user: ec2-user
     frontend:
-      ansible_host: 54.167.233.92
-      ansible_user: ubuntu
+      hosts:
+        frontend1:
+          ansible_host: 54.167.233.92
+          ansible_user: ubuntu
