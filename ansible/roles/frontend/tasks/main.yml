@@ -1,3 +1,11 @@
+- name: Show backend variables
+  debug:
+    msg:
+      - "app_repo = {{ app_repo | default('NOT DEFINED') }}"
+      - "app_dir = {{ app_dir | default('NOT DEFINED') }}"
+      - "mysql_db_name = {{ mysql_db_name | default('NOT DEFINED') }}"
+      - "mysql_endpoint = {{ mysql_endpoint | default('NOT DEFINED') }}"
+
 - name: Install Nginx
   apt:
     name: nginx
