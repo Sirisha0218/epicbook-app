@@ -15,6 +15,12 @@
     state: present
   become: yes
 
+- name: Remove existing app directory
+  file:
+    path: "{{ app_dir }}"
+    state: absent
+  become: yes
+
 - name: Clone EpicBook repo
   git:
     repo: "{{ app_repo }}"
