@@ -23,14 +23,17 @@
   template:
     src: "{{ nginx_conf_template }}"
     dest: /etc/nginx/sites-available/epicbook.conf
+  become: yes
 
 - name: Enable site
   file:
     src: /etc/nginx/sites-available/epicbook.conf
     dest: /etc/nginx/sites-enabled/epicbook.conf
     state: link
+  become: yes
 
 - name: Restart Nginx
   service:
     name: nginx
     state: restarted
+  become: yes
