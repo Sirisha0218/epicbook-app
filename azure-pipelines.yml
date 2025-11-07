@@ -23,6 +23,10 @@ stages:
             inputs:
               secureFile: ubuntu-key
 
+          - script: |
+              chmod 600 $(sshKey.secureFilePath)
+            displayName: "Fix SSH key permissions"
+
           # Install Ansible
           - script: |
               sudo apt-get update
